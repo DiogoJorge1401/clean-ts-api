@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "diogojorge1401 <diogojorge1401@gmail.com>",
   "license": "ISC",
