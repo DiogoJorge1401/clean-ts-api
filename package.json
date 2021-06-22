@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "npm test -- --watch",
+    "test:integration": "npm test -- --watch -c jest-integation-config.js",
+    "test:staged":"npm test -- --findRelatedTests",
+    "test:ci":"npm test -- --coverage"
   },
   "author": "diogojorge1401 <diogojorge1401@gmail.com>",
   "license": "ISC",
