@@ -8,14 +8,15 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integation-config.js",
-    "test:staged":"npm test -- --findRelatedTests",
-    "test:ci":"npm test -- --coverage"
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "author": "diogojorge1401 <diogojorge1401@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.4",
+    "@types/validator": "^13.1.4",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "eslint": "^7.29.0",
     "eslint-config-standard-with-typescript": "^20.0.0",
@@ -27,5 +28,8 @@
     "ts-jest": "^27.0.3",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "validator": "^13.6.0"
   }
 }
