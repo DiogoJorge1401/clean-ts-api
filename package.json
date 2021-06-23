@@ -14,8 +14,10 @@
   "author": "diogojorge1401 <diogojorge1401@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.2.5",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^26.0.23",
+    "@types/mongodb": "^3.6.18",
     "@types/node": "^15.12.4",
     "@types/validator": "^13.1.4",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
@@ -32,6 +34,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "mongodb": "^3.6.9",
     "validator": "^13.6.0"
   }
 }
