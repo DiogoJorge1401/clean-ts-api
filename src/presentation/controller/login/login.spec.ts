@@ -1,7 +1,7 @@
 import { LoginController } from "./login";
 import { badRequest } from '../../helpers/http-helper'
 import { InvalidParamError, MissingParamError } from "../../errors";
-import { EmailValidator } from "../singup/singup-protocols";
+import { EmailValidator, HttpRequest } from "../singup/singup-protocols";
 
 const makeEmailValidator = ():EmailValidator => {
   class EmailValidatorStub implements EmailValidator{
@@ -11,7 +11,12 @@ const makeEmailValidator = ():EmailValidator => {
   }
   return new EmailValidatorStub();
 }
-
+const makeFakeRequest = ():HttpRequest => ({
+    body:{
+      email: 'any_email',
+      password: 'any_password'
+    }
+})
 interface SutTypes {
   sut: LoginController
   emailValidatorStub:EmailValidator
@@ -48,37 +53,21 @@ describe('Login Controller', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('password')))
   })
 
-  
-
   test('Should call EmailValidator with correct email', async () => {
     const { sut,emailValidatorStub } = makeSut();
     const isValid = jest.spyOn(emailValidatorStub,'isValid')
-    
-    const httpRequest = {
-      body:{
-        email: 'any_email',
-        password: 'any_password'
-      }
-    }
 
-    await sut.handle(httpRequest)
+    await sut.handle(makeFakeRequest())
 
-    expect(isValid).toHaveBeenCalledWith(httpRequest.body.email)
+    expect(isValid).toHaveBeenCalledWith(makeFakeRequest().body.email)
 
   })
 
   test('Should return 400 if an invalid email is provided', async () => {
     const { sut,emailValidatorStub } = makeSut();
     jest.spyOn(emailValidatorStub,'isValid').mockReturnValueOnce(false)
-    
-    const httpRequest = {
-      body:{
-        email: 'invalid_email',
-        password: 'any_password'
-      }
-    }
 
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(makeFakeRequest())
 
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
 
