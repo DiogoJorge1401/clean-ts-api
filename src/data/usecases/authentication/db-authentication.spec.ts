@@ -1,5 +1,6 @@
 import { AuthenticationModel } from "../../../domain/usecases/authentication"
 import { HashCompare } from "../../protocols/criptography/hash-compare"
+import { TokenGenerator } from "../../protocols/criptography/token-generate"
 
 import { LoadAccountByEmailRepository } from "../../protocols/db/load-account-by-email-repository"
 
@@ -33,6 +34,15 @@ const makeHashCompare = (): HashCompare => {
   }
   return new HashCompareStub()
 }
+const maketokenGenerator = (): TokenGenerator => {
+  class TokenGeneratorStub implements TokenGenerator {
+    async generate(id: string): Promise<string> {
+
+      return new Promise(resolve => resolve('any_token'))
+    }
+  }
+  return new TokenGeneratorStub()
+}
 
 const makeFakeAuthentication = (): AuthenticationModel => ({
   email: 'any_email@mail.com',
@@ -43,6 +53,7 @@ interface SutTypes {
   sut: DbAuthentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   hashCompareStub: HashCompare
+  tokenGeneratorStub:TokenGenerator
 }
 
 const makeSut = (): SutTypes => {
@@ -50,12 +61,19 @@ const makeSut = (): SutTypes => {
 
   const hashCompareStub = makeHashCompare()
 
-  const sut = new DbAuthentication(loadAccountByEmailRepositoryStub,hashCompareStub)
+  const tokenGeneratorStub = maketokenGenerator()
+
+  const sut = new DbAuthentication(
+    loadAccountByEmailRepositoryStub,
+    hashCompareStub,
+    tokenGeneratorStub
+    )
 
   return {
     sut,
     loadAccountByEmailRepositoryStub,
-    hashCompareStub
+    hashCompareStub,
+    tokenGeneratorStub
   }
 }
 
@@ -107,5 +125,15 @@ describe('DbAuthentication UseCase', () => {
     const accessToken = await sut.auth(makeFakeAuthentication())
 
     expect(accessToken).toBeNull()
+  })
+
+  test('Sould call TokenGenerator with correct id', async () => {
+    const { tokenGeneratorStub, sut } = makeSut()
+
+    const generateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
+
+    await sut.auth(makeFakeAuthentication())
+
+    expect(generateSpy).toHaveBeenCalledWith('any_id')
   })
 })
