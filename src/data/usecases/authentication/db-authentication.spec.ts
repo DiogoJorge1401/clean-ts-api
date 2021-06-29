@@ -1,13 +1,11 @@
-import { AuthenticationModel } from "../../../domain/usecases/authentication"
-
-import { HashCompare } from "../../protocols/criptography/hash-compare"
-
-import { TokenGenerator } from "../../protocols/criptography/token-generate"
-
-import { LoadAccountByEmailRepository } from "../../protocols/db/load-account-by-email-repository"
-import { updateAccessTokenRepository } from "../../protocols/db/update-access-token"
-
-import { AccountModel } from "../add-account/db-add-account-protocols"
+import { 
+  AuthenticationModel,
+  HashCompare,
+  TokenGenerator,
+  LoadAccountByEmailRepository,
+  updateAccessTokenRepository,
+  AccountModel,
+} from "./db-authentication-protocols"
 
 import { DbAuthentication } from "./db-authentication"
 
@@ -16,6 +14,11 @@ const makeFakeAccount = (): AccountModel => ({
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'hashed_password'
+})
+
+const makeFakeAuthentication = (): AuthenticationModel => ({
+  email: 'any_email@mail.com',
+  password: 'any_password'
 })
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
@@ -58,10 +61,7 @@ const makeUpdateAccessTokenRepository = (): updateAccessTokenRepository => {
   return new updateAccessTokenRepositoryStub()
 }
 
-const makeFakeAuthentication = (): AuthenticationModel => ({
-  email: 'any_email@mail.com',
-  password: 'any_password'
-})
+
 
 interface SutTypes {
   sut: DbAuthentication
