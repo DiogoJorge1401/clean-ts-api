@@ -4,20 +4,20 @@ import {
   HashCompare,
   Encrypter,
   LoadAccountByEmailRepository,
-  updateAccessTokenRepository,
+  UpdateAccessTokenRepository,
 } from './db-authentication-protocols'
 
 export class DbAuthentication implements Authentication {
   private readonly loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   private readonly hashCompareStub: HashCompare
   private readonly encrypterrStub: Encrypter
-  private readonly updateAccessTokenRepositoryStub: updateAccessTokenRepository
+  private readonly updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
 
   constructor(
     loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository,
     hashCompareStub: HashCompare,
     encrypterrStub: Encrypter,
-    updateAccessTokenRepositoryStub: updateAccessTokenRepository
+    updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
   ) {
     this.loadAccountByEmailRepositoryStub = loadAccountByEmailRepositoryStub
 

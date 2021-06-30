@@ -3,7 +3,7 @@ import {
   HashCompare,
   Encrypter,
   LoadAccountByEmailRepository,
-  updateAccessTokenRepository,
+  UpdateAccessTokenRepository,
   AccountModel,
 } from "./db-authentication-protocols"
 
@@ -51,8 +51,8 @@ const makeEncrypter = (): Encrypter => {
   return new EncrypterStub()
 }
 
-const makeUpdateAccessTokenRepository = (): updateAccessTokenRepository => {
-  class updateAccessTokenRepositoryStub implements updateAccessTokenRepository {
+const makeUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
+  class updateAccessTokenRepositoryStub implements UpdateAccessTokenRepository {
     async updateAccessToken(id: string,token: string): Promise<void> {
 
       return new Promise(resolve => resolve())
@@ -68,7 +68,7 @@ interface SutTypes {
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   hashCompareStub: HashCompare
   encrypterStub:Encrypter
-  updateAccessTokenRepositoryStub:updateAccessTokenRepository
+  updateAccessTokenRepositoryStub:UpdateAccessTokenRepository
 }
 
 const makeSut = (): SutTypes => {

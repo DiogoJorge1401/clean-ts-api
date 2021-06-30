@@ -1,6 +1,6 @@
-import { SingUpController } from './singup'
+import { SingUpController } from './singup-controller'
 import { MissingParamError } from "../../errors"
-import {AccountModel,AddAccount, AddAccountModel, HttpRequest,Validation} from "./singup-protocols"
+import {AccountModel,AddAccount, AddAccountModel, HttpRequest,Validation} from "./singup-controller-protocols"
 import { ok,serverError,badRequest } from '../../helpers/http/http-helper'
 
 const makeAddAccount = ():AddAccount=>{
