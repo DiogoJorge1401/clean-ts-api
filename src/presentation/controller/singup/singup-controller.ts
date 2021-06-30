@@ -2,13 +2,7 @@ import { HttpResponse, HttpRequest, Controller, AddAccount, Validation } from ".
 import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 
 export class SingUpController implements Controller {
-    private readonly addAccount: AddAccount
-    private readonly validation: Validation
-
-    constructor(addAccount: AddAccount, validation: Validation) {
-        this.addAccount = addAccount
-        this.validation = validation
-    }
+    constructor(protected addAccount: AddAccount, protected validation: Validation) {}
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const error = this.validation.validate(httpRequest.body)

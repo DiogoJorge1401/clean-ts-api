@@ -4,12 +4,7 @@ import { badRequest } from "../http/http-helper";
 import { Validation } from "../../protocols/validation";
 
 export class EmailValidation implements Validation{
-  private readonly fieldName: string
-  private readonly emailValidator: EmailValidator
-  constructor(fieldName:string,emailValidator: EmailValidator){
-    this.emailValidator = emailValidator
-    this.fieldName = fieldName;
-  }
+  constructor(protected fieldName:string,protected emailValidator: EmailValidator){}
   validate(input:any): Error{
     const isValid = this.emailValidator.isValid(input[this.fieldName])
     if (!isValid) {
