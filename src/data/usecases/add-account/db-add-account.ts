@@ -25,6 +25,5 @@ export class DbAddAccount implements AddAccount {
       return newAccount
     }
     return null
-
   }
 }
