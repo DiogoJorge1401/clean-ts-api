@@ -1,7 +1,6 @@
-import { InvalidParamError } from "../../errors";
-import { EmailValidator } from "../../protocols/email-validator";
-import { badRequest } from "../http/http-helper";
-import { Validation } from "../../protocols/validation";
+import { InvalidParamError } from "../../presentation/errors";
+import { EmailValidator } from "../protcols/email-validator";
+import { Validation } from "../../presentation/protocols/validation";
 
 export class EmailValidation implements Validation{
   constructor(protected fieldName:string,protected emailValidator: EmailValidator){}
